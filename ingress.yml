@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: flask-express-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: express.containers.test
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: express-container
+            port:
+              number: 3000
+  - host: flask.containers.test
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: flask-container
+            port:
+              number: 3000
